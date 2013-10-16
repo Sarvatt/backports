@@ -124,7 +124,7 @@ include/drm/drmP.h
 include/drm/drm_rect.h
 include/drm/drm_sysfs.h
 include/drm/drm_usb.h
-include/drm/drm_vma_manager.h
+#include/drm/drm_vma_manager.h
 include/drm/exynos_drm.h
 include/drm/gma_drm.h
 include/drm/i915_drm.h
