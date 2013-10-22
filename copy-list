@@ -145,6 +145,7 @@ include/drm/drm_vma_manager.h
 include/drm/exynos_drm.h
 include/drm/gma_drm.h
 include/drm/i915_drm.h
+include/drm/i915_pciids.h
 include/drm/i915_powerwell.h
 include/drm/i2c/
 include/drm/ttm/
