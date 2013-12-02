@@ -1,0 +1,37 @@
+From 09e614ed69dbc6362d035e933efaf3262d21de40 Mon Sep 17 00:00:00 2001
+From: Robert Hooker <sarvatt@ubuntu.com>
+Date: Mon, 2 Dec 2013 11:03:02 -0500
+Subject: [PATCH 1/2] Revert "i915: intel_acpi: convert acpi_get_handle() to
+ acpi_has_method()"
+
+This reverts commit 2a3ca1429589521df49fd9348fc382c34b57a88f.
+---
+ drivers/gpu/drm/i915/intel_acpi.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/i915/intel_acpi.c b/drivers/gpu/drm/i915/intel_acpi.c
+index dfff090..3a5e768 100644
+--- a/drivers/gpu/drm/i915/intel_acpi.c
++++ b/drivers/gpu/drm/i915/intel_acpi.c
+@@ -193,14 +193,16 @@ out:
+ 
+ static bool intel_dsm_pci_probe(struct pci_dev *pdev)
+ {
+-	acpi_handle dhandle;
++	acpi_handle dhandle, intel_handle;
++	acpi_status status;
+ 	int ret;
+ 
+ 	dhandle = ACPI_HANDLE(&pdev->dev);
+ 	if (!dhandle)
+ 		return false;
+ 
+-	if (!acpi_has_method(dhandle, "_DSM")) {
++	status = acpi_get_handle(dhandle, "_DSM", &intel_handle);
++	if (ACPI_FAILURE(status)) {
+ 		DRM_DEBUG_KMS("no _DSM method for intel device\n");
+ 		return false;
+ 	}
+-- 
+1.8.3.2
+
